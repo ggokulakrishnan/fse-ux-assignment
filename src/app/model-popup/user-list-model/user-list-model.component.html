@@ -1,0 +1,31 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" (click)="close()">&times;</button>
+      <h3 class="modal-title" style="text-align: center;">User Display-Selection Region</h3>
+    </div>
+    <div class="modal-body">
+      <div>
+        Quick Seach: <input type="text" class="form-control" (input)="filterItem()" 
+          [(ngModel)]="searchText" style="display: inline; width: 48%;" placeholder="Search...">
+
+        <div style="border: solid 0px grey; height: 5px;"></div>
+      </div>
+      <div *ngFor="let user of filteredList">
+
+        <div style="border-top: solid 1px grey; height: 5px;"></div>
+        <input type="text" class="form-control" style="width: 15%; display: inline; margin-left: 1%;" disabled value={{user.FirstName}}>
+        <input type="text" class="form-control" style="width: 15%; display: inline; margin-left: 1%;" disabled value={{user.LastName}}>
+        <input type="text" class="form-control" style="width: 15%; display: inline; margin-left: 1%;" disabled value={{user.EmployeeID}}>
+
+        <button class="btn btn-default" (click)="SelectUser(user)" style="width: 15%; display: inline; margin-left: 1%;">Select</button>
+
+        <div style="border: solid 0px grey; height: 5px;"></div>
+      </div>
+
+      <div *ngIf="userListCount==0">
+        <label>The System is not having User</label>
+      </div>
+    </div>
+  </div>
+</div>

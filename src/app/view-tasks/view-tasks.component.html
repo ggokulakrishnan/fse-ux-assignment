@@ -1,0 +1,73 @@
+<div class="container">
+  <div style="text-align: center;">
+      <h4 id="userMsg"></h4>
+      <br/>
+  </div>  
+  <div>
+    <label style="display: inline;">Select Project: </label>
+    <input type="text" placeholder="Select a Project" [(ngModel)]="Project"
+    style="width: 15%; display: inline; margin-left: 1%" class="form-control" disabled>
+    <button id="openModalButton" class="form-control" 
+    style="display: inline; margin-left: 1%; width: 10%;" 
+    (click)="openProjectDialog()">Search</button>
+  </div>
+  <div style="margin-top: 1%;">
+    <label style="display: inline;">Sort By: </label> &nbsp;   
+    <button class="form-control" style="display: inline;margin-left: 4%; width: 8%;" 
+      (click)="sortingTask('SDate')">Start Date</button>
+    <button class="form-control" style="display: inline;margin-left: 1%; width: 8%;" 
+      (click)="sortingTask('EDate')">End Date</button>
+    <button class="form-control" style="display: inline;margin-left: 1%; width: 8%;"
+     (click)="sortingTask('Priority')">Priority</button>
+    <button class="form-control" style="display: inline;margin-left: 1%; width: 8%;"
+     (click)="sortingTask('Completed')">Completed</button>
+  </div>
+  <div *ngFor="let task of filteredList">
+    <hr style="border-top: dotted 1px;" />
+    <div class="row">
+      <div class="col-xs-2" style="border: solid 0px red; text-align: center; width: 25%;">
+        <label>Task</label>
+        <br/>
+        <span>{{task.Task}}</span>
+      </div>
+      <div class="col-xs-2" style="border: solid 0px red; text-align: center; width: 25%;">
+        <label>Parent Task</label>
+        <br/>
+        <span style="font-weight: 10px;">{{task.ParentTask}}</span>
+      </div>
+      <div class="col-xs-2" style="border: solid 0px red; text-align: center; width: 8%;">
+        <label>Priority</label>
+        <br/>
+        <span>{{task.Priority}}</span>
+      </div>
+      <div class="col-xs-2" style="border: solid 0px red; text-align: center; width: 10%;">
+        <label>Start Date</label>
+        <br/>
+        <span>{{task.StartDate | date: 'dd-MM-yyyy'}}</span>
+      </div>
+      <div class="col-xs-2" style="border: solid 0px red; text-align: center; width: 10%;">
+        <label>End Date</label>
+        <br/>        
+        <span>{{task.EndDate | date: 'dd-MM-yyyy'}}</span>
+      </div>
+      <div class="col-xs-2"  
+        style="border: solid 0px red; text-align: center; 
+        vertical-align: middle;">
+        <div style="height: 5px;"></div>
+        <button class="btn btn-default" [disabled]="task.Status" 
+          style="width: 40%;"
+          (click)="EditTask(task)">Edit</button>
+        &nbsp;  
+        <button class="btn btn-default" [disabled]="task.Status" 
+          style="width: 50%;"
+          (click)="EndTask(task)">End Task</button>
+        <div style="height: 5px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="taskListCount==0">
+    <hr style="border-top: dotted 1px;" />
+    <b>The system is not having tasks defined</b>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" (click)="close()">&times;</button>
+      <h4 class="modal-title" style="text-align: center;">Display all Parent Task (User Stories)</h4>
+    </div>
+    <div class="modal-body">
+      <div>
+        <input type="text" class="form-control" (input)="filterItem()" 
+          [(ngModel)]="searchText" style="display: inline; width: 100%;"
+          placeholder="Search User Stories (Parent Task list)...">
+      </div>
+      <div *ngFor="let task of filteredList">
+        <hr style="border-top: dotted 1px;" />
+        <input type="text" class="form-control" 
+        style="width: 75%; display: inline;" disabled value={{task.ParentTask}}>
+        &nbsp;&nbsp;
+        <button class="btn btn-default" (click)="SelectTask(task)" 
+        style="width: 12%; display: inline;">Select</button>
+      </div>
+
+      <div *ngIf="parentTaskListCount==0">
+        <label>There are no Parent tasks</label>
+      </div>
+    </div>
+  </div>
+</div>
